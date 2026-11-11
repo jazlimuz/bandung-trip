@@ -6,6 +6,7 @@ A mobile-first, editable Bandung travel dashboard for 22–27 November 2026.
 - `index.html` — complete app
 - `manifest.json` — Add to Home Screen / PWA metadata
 - `sw.js` — offline app-shell caching
+- Settings include light/dark/system theme, undo/redo history and reset-to-original-plan
 - `icon-192.png`, `icon-512.png` — app icons
 
 ## Publish with GitHub Pages
@@ -29,3 +30,9 @@ A mobile-first, editable Bandung travel dashboard for 22–27 November 2026.
 
 ## Important
 This app is a planning tool, not a booking system. Check flight, hotel, transport, opening-hour, child-fare and payment details against providers before travelling. The exchange rate shown initially is an editable placeholder estimate; refresh it online before using it for actual conversions.
+
+## v3 update
+- Overview now reads flight and accommodation details from the same shared trip data as the editable tabs.
+- Added explicit Save Changes button (autosave remains enabled).
+- Added Settings with light/dark/system theme, undo/redo, and reset-to-original-plan.
+- Improved iPhone safe-area spacing for the top camera/status area.
