@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#132b35">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Bandung Trip">
+<meta name="description" content="Your editable Bandung family trip planner for 22–27 November 2026.">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Bandung · Family Trip</title>
+<style>
+:root{--ink:#172e38;--muted:#71818a;--paper:#f4f6f5;--card:#fff;--line:#e5eae8;--teal:#247d70;--teal2:#e5f2ee;--gold:#d5a65c;--danger:#b84e4e;--shadow:0 8px 28px rgba(20,45,55,.07);--radius:20px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+.app{max-width:920px;margin:auto;padding:0 16px}
+.hero{background:linear-gradient(135deg,#142f3a,#285b60 70%,#3e756e);color:white;padding:25px 20px 22px;border-radius:0 0 28px 28px;margin:0 -16px 18px;box-shadow:var(--shadow)}
+.topline{display:flex;justify-content:space-between;align-items:center;color:#c5d8d6;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+h1{font-size:28px;line-height:1.1;margin:14px 0 7px;letter-spacing:-.04em}.sub{color:#d4e3e1;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:20px}.stat{background:#ffffff17;border:1px solid #ffffff20;border-radius:15px;padding:11px}.stat b{display:block;font-size:21px}.stat span{font-size:11px;color:#d4e3e1}
+.save-status{font-size:11px;color:#d4e3e1;margin-top:12px;display:flex;gap:7px;align-items:center}.dot{width:7px;height:7px;background:#9ce0bd;border-radius:50%}
+.nav{display:flex;gap:7px;overflow-x:auto;padding:3px 0 14px;scrollbar-width:none;position:sticky;top:0;background:var(--paper);z-index:5}.nav::-webkit-scrollbar{display:none}.nav button{white-space:nowrap;border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:99px;padding:9px 13px;font-size:12px;font-weight:650}.nav button.active{background:var(--ink);color:white;border-color:var(--ink)}
+main{padding-bottom:24px}.page{display:none}.page.active{display:block}.section-head{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:15px 0 11px}.section-head h2{font-size:20px;margin:0;letter-spacing:-.03em}.eyebrow{font-size:10px;color:var(--teal);font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}.card h3{font-size:15px;margin:0 0 10px}.muted{color:var(--muted)}.small{font-size:12px}.tiny{font-size:11px;color:var(--muted)}.row{display:flex;align-items:center;gap:10px}.between{justify-content:space-between}.grow{flex:1;min-width:0}.pill{display:inline-flex;padding:5px 9px;border-radius:99px;background:var(--teal2);color:var(--teal);font-size:10px;font-weight:800}.pill.gold{background:#fbf2e4;color:#9b6d2e}.divider{height:1px;background:var(--line);margin:13px 0}
+input,textarea,select{width:100%;border:1px solid var(--line);background:#fbfcfb;border-radius:11px;padding:11px 12px;color:var(--ink);outline:none}input:focus,textarea:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px #247d7018}textarea{resize:vertical;min-height:75px}.field{margin:9px 0}.field label{display:block;font-size:11px;color:var(--muted);font-weight:700;margin:0 0 5px}
+.btn{border:0;border-radius:12px;padding:10px 13px;background:var(--ink);color:#fff;font-weight:700;font-size:12px}.btn.secondary{background:#edf2f0;color:var(--ink)}.btn.teal{background:var(--teal)}.btn.danger{background:#fff0ef;color:var(--danger)}.btn.smallbtn{padding:7px 9px;font-size:11px}.btn.full{width:100%}.iconbtn{border:0;background:#f3f5f4;color:var(--muted);border-radius:9px;padding:7px 9px}
+.list{display:flex;flex-direction:column;gap:9px}.listrow{display:flex;align-items:flex-start;gap:9px}.listrow input[type=checkbox]{width:18px;height:18px;accent-color:var(--teal);margin-top:2px}.listrow .txt{flex:1;min-width:0}.listrow.done .txt{text-decoration:line-through;color:#9aa5a3}
+.daytabs{display:flex;gap:6px;overflow:auto;padding:2px 0 12px}.daytabs button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 12px;min-width:62px;color:var(--muted);font-size:11px}.daytabs button.active{background:var(--teal);color:#fff;border-color:var(--teal)}.daytabs b{display:block;font-size:14px}
+.item{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid #f0f2f1}.item:last-child{border-bottom:0}.item .content{flex:1;min-width:0}.item .content input{padding:8px 9px;font-size:13px}.item .content small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.addline{display:flex;gap:7px;margin-top:10px}.addline input{min-width:0}.addline button{flex-shrink:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric{background:#f7faf8;border-radius:14px;padding:12px}.metric span{display:block;font-size:10px;color:var(--muted)}.metric b{font-size:19px;display:block;margin-top:3px}
+.progress{height:8px;background:#edf1ef;border-radius:99px;overflow:hidden}.progress span{height:100%;display:block;background:var(--teal);border-radius:99px}
+.money{font-size:26px;font-weight:800;letter-spacing:-.04em}.budgetrow{display:grid;grid-template-columns:1fr 104px 30px;gap:7px;align-items:center;margin:7px 0}.budgetrow input{padding:9px;font-size:12px}
+footer{text-align:center;color:#98a39f;font-size:10px;padding:12px 0 24px}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(16px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));z-index:10}.bottominner{max-width:920px;margin:auto;display:flex;gap:8px}.bottominner button{flex:1}
+.notice{background:#fff8e9;border:1px solid #f1e2c4;color:#775b2e;padding:12px;border-radius:13px;font-size:12px}
+.hidden{display:none!important}
+@media(min-width:700px){.hero{margin:18px 0;border-radius:26px}.app{padding:0 22px}.nav{border-radius:14px}.daylayout{display:grid;grid-template-columns:1fr 1fr;gap:12px}.daylayout .card{margin:0}.bottom{display:none}body{padding-bottom:30px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+ <div class="topline"><span>Family travel planner</span><span>22—27 NOV 2026</span></div>
+ <h1 id="heroTitle">Bandung, together.</h1>
+ <div class="sub">6 days · 5 nights · 2 adults + Melissa (4)</div>
+ <div class="stats">
+  <div class="stat"><b>06</b><span>Days away</span></div>
+  <div class="stat"><b id="packedStat">0/0</b><span>Packing done</span></div>
+  <div class="stat"><b id="spentStat">S$0</b><span>Spent so far</span></div>
+ </div>
+ <div class="save-status"><span class="dot"></span><span id="saveStatus">Saved on this device</span></div>
+</header>
+<nav class="nav" id="nav">
+ <button class="active" data-page="overview">Overview</button><button data-page="itinerary">Itinerary</button><button data-page="travel">Flights & stays</button><button data-page="transport">Transport</button><button data-page="food">Food</button><button data-page="budget">Budget</button><button data-page="packing">Packing</button><button data-page="ideas">Ideas bank</button>
+</nav>
+<main>
+<section class="page active" id="overview">
+ <div class="section-head"><div><div class="eyebrow">Your trip at a glance</div><h2>Ready when you are</h2></div><span class="pill">Editable plan</span></div>
+ <div class="card">
+  <h3>Trip details</h3>
+  <div class="field"><label>Trip name</label><input data-bind="tripName"></div>
+  <div class="grid2"><div class="metric"><span>Travellers</span><b>3 people</b></div><div class="metric"><span>Travel dates</span><b>22–27 Nov</b></div></div>
+  <div class="divider"></div><div class="small muted">2 adults and one 4-year-old child. Keep the days flexible, with breaks built in for Melissa.</div>
+ </div>
+ <div class="card">
+  <h3>Flights</h3>
+  <div class="row between"><b class="small">Outbound · 22 November</b><span class="pill">Scoot</span></div>
+  <div style="font-size:18px;font-weight:800;margin:7px 0">SIN 07:55 → CGK 08:50</div><div class="tiny">Singapore to Soekarno-Hatta · verify against e-ticket</div>
+  <div class="divider"></div><div class="row between"><b class="small">Return · 27 November</b><span class="pill">Garuda Indonesia</span></div>
+  <div style="font-size:18px;font-weight:800;margin:7px 0">CGK 18:45 → SIN 21:45</div><div class="tiny">Soekarno-Hatta to Singapore · verify against e-ticket</div>
+ </div>
+ <div class="card">
+  <h3>Where you're staying</h3>
+  <div class="row between"><b>Bobocabin Signature Sukawana</b><span class="pill gold">2 nights</span></div><div class="tiny">22–24 November</div>
+  <div class="divider"></div><div class="row between"><b>voco Bandung Setiabudi</b><span class="pill gold">3 nights</span></div><div class="tiny">24–27 November</div>
+ </div>
+ <div class="card">
+  <h3>Booking checklist</h3><div id="bookingList" class="list"></div>
+ </div>
+ <div class="card">
+  <h3>Important trip notes</h3><textarea data-bind="tripNotes"></textarea>
+ </div>
+</section>
+<section class="page" id="itinerary">
+ <div class="section-head"><div><div class="eyebrow">Six days, at your pace</div><h2>Daily itinerary</h2></div><span class="pill">Tap to edit</span></div>
+ <div class="daytabs" id="dayTabs"></div><div id="dayEditor"></div>
+ <div class="notice">Keep Kawah Putih optional until you decide whether the longer drive and walking are comfortable for everyone. Build in rest time rather than trying to tick off every attraction.</div>
+</section>
+<section class="page" id="travel">
+ <div class="section-head"><div><div class="eyebrow">Getting there & staying</div><h2>Flights & accommodation</h2></div></div>
+ <div class="card">
+  <h3>Outbound flight</h3><div class="field"><label>Airline / flight number</label><input data-bind="outAirline"></div><div class="field"><label>Route and time</label><input data-bind="outFlight"></div><div class="field"><label>Booking reference</label><input data-bind="outRef" placeholder="Add booking reference"></div>
+  <div class="divider"></div><h3>Return flight</h3><div class="field"><label>Airline / flight number</label><input data-bind="returnAirline"></div><div class="field"><label>Route and time</label><input data-bind="returnFlight"></div><div class="field"><label>Booking reference</label><input data-bind="returnRef" placeholder="Add booking reference"></div>
+ </div>
+ <div class="card">
+  <h3>Accommodation 1</h3><div class="field"><label>Property</label><input data-bind="hotel1"></div><div class="field"><label>Dates / notes</label><textarea data-bind="hotel1Notes"></textarea></div>
+  <div class="divider"></div><h3>Accommodation 2</h3><div class="field"><label>Property</label><input data-bind="hotel2"></div><div class="field"><label>Dates / notes</label><textarea data-bind="hotel2Notes"></textarea></div>
+ </div>
+</section>
+<section class="page" id="transport">
+ <div class="section-head"><div><div class="eyebrow">Move around smartly</div><h2>Transport planner</h2></div></div>
+ <div class="card">
+  <h3>Transport plan by day</h3><textarea data-bind="transportPlan" style="min-height:230px"></textarea>
+ </div>
+ <div class="card">
+  <h3>Private driver estimate</h3><div class="grid2"><div class="field"><label>Daily rate (IDR)</label><input type="number" data-bind="driverRate"></div><div class="field"><label>Number of days</label><input type="number" data-bind="driverDays"></div></div>
+  <div class="metric"><span>Estimated driver total</span><b id="driverTotal">Rp0</b></div><p class="tiny">Based on the quoted Rp650,000/day. Confirm what's included; tolls, parking, overtime and waiting time may be extra.</p>
+  <div class="field"><label>Driver / transfer notes</label><textarea data-bind="driverNotes"></textarea></div>
+ </div>
+ <div class="card">
+  <h3>Transport decisions</h3><div class="list" id="transportChecks"></div>
+  <div class="field"><label>Other transport notes</label><textarea data-bind="transportNotes"></textarea></div>
+ </div>
+</section>
+<section class="page" id="food">
+ <div class="section-head"><div><div class="eyebrow">Meals & family-friendly stops</div><h2>Food planner</h2></div></div>
+ <div class="card"><h3>Food preferences</h3><textarea data-bind="foodNotes"></textarea><p class="tiny">Halal preference: verify certification or ingredients directly with each venue. Restaurant names and halal status are not pre-confirmed.</p></div>
+ <div id="foodDays"></div>
+ <div class="card"><h3>Food ideas bank</h3><div id="foodBank"></div><div class="addline"><input id="foodIdeaInput" placeholder="Add a food idea"><button class="btn teal" id="addFoodIdea">Add</button></div></div>
+</section>
+<section class="page" id="budget">
+ <div class="section-head"><div><div class="eyebrow">Money without the guesswork</div><h2>Budget & spending</h2></div></div>
+ <div class="card">
+  <h3>On-ground spending pool</h3><div class="field"><label>Total budget (SGD)</label><input type="number" data-bind="budgetTotal"></div><div class="money" id="budgetTotalDisplay">S$1,200</div><div class="tiny">Working budget; excludes flights and accommodation already paid.</div>
+ </div>
+ <div class="card">
+  <h3>Cash vs YouTrip allocation</h3><div class="grid2"><div class="metric"><span>Physical cash · SGD equivalent</span><b id="cashDisplay">S$500</b></div><div class="metric"><span>YouTrip · SGD</span><b id="youtripDisplay">S$700</b></div></div>
+  <div class="field"><label>Cash allocation (SGD)</label><input type="number" data-bind="cashAllocation"></div><div class="field"><label>YouTrip allocation (SGD)</label><input type="number" data-bind="youtripAllocation"></div>
+  <div class="row between"><span class="small muted">Unallocated</span><b id="unallocated">S$0</b></div><div class="tiny" id="allocationMessage"></div>
+ </div>
+ <div class="card">
+  <h3>SGD ↔ IDR converter</h3><div class="field"><label>Exchange rate · IDR for S$1</label><input type="number" data-bind="exchangeRate"></div><div class="tiny" id="rateStatus">Editable planning rate. Refresh online when connected.</div>
+  <div class="grid2"><div class="field"><label>SGD</label><input type="number" id="sgdInput" value="10" step="0.01"></div><div class="field"><label>IDR</label><input id="idrOutput" readonly></div></div>
+  <button class="btn secondary full" id="refreshRate">Refresh live rate</button>
+ </div>
+ <div class="card">
+  <div class="row between"><h3>Daily spending tracker</h3><span class="pill" id="expenseCount">0 entries</span></div>
+  <div class="grid2"><div class="metric"><span>Total spent</span><b id="spentTotal">S$0</b></div><div class="metric"><span>Budget remaining</span><b id="remaining">S$1,200</b></div></div>
+  <div class="field"><label>Expense description</label><input id="expenseName" placeholder="e.g. Lunch in Lembang"></div>
+  <div class="grid2"><div class="field"><label>Amount</label><input id="expenseAmount" type="number" step="0.01" placeholder="0"></div><div class="field"><label>Currency</label><select id="expenseCurrency"><option value="SGD">SGD</option><option value="IDR">IDR</option></select></div></div>
+  <div class="grid2"><div class="field"><label>Day</label><select id="expenseDay"><option>Day 1</option><option>Day 2</option><option>Day 3</option><option>Day 4</option><option>Day 5</option><option>Day 6</option></select></div><div class="field"><label>Paid with</label><select id="expenseMethod"><option>Cash</option><option>YouTrip</option><option>Other</option></select></div></div>
+  <button class="btn teal full" id="addExpense">Add expense</button><div class="divider"></div><div id="expenseList" class="list"></div>
+ </div>
+ <div class="card"><h3>Budget category plan</h3><div id="budgetCategories"></div><div class="addline"><input id="categoryName" placeholder="New category"><input id="categoryAmount" type="number" placeholder="SGD" style="max-width:90px"><button class="btn teal" id="addCategory">Add</button></div><p class="tiny">Planning estimates are editable. Track actual purchases in Daily spending above.</p></div>
+</section>
+<section class="page" id="packing">
+ <div class="section-head"><div><div class="eyebrow">Don't leave the essentials behind</div><h2>Packing checklist</h2></div></div>
+ <div class="card"><div class="row between"><b id="packingCount">0 of 0 packed</b><b id="packingPercent">0%</b></div><div class="progress" style="margin:9px 0 15px"><span id="packingProgress" style="width:0%"></span></div><div id="packingList" class="list"></div><div class="divider"></div><div class="addline"><input id="packingInput" placeholder="Add packing item"><button class="btn teal" id="addPacking">Add</button></div><button class="btn secondary full" id="resetPacking" style="margin-top:10px">Reset checklist</button></div>
+</section>
+<section class="page" id="ideas">
+ <div class="section-head"><div><div class="eyebrow">Keep your options open</div><h2>Extra activity ideas</h2></div><span class="pill" id="ideaCount">0 ideas</span></div>
+ <div class="card"><p class="small muted">Save alternatives here. Add an idea straight into any day's itinerary when it suits your pace.</p><div class="addline"><input id="ideaInput" placeholder="Add attraction or activity"><button class="btn teal" id="addIdea">Add</button></div><div class="divider"></div><div class="field"><label>Add selected idea to</label><select id="ideaDay"></select></div><div id="ideaList" class="list"></div></div>
+</section>
+</main>
+<footer>Bandung Family Trip · Your changes are saved in this browser on this device.</footer>
+</div>
+<div class="bottom"><div class="bottominner"><button class="btn secondary" id="exportBtn">Export backup</button><button class="btn secondary" id="importBtn">Import backup</button><button class="btn teal" id="shareBtn">Share</button></div></div>
+<input type="file" id="importFile" accept="application/json,.json" class="hidden">
+<script>
+const defaults = {
+ tripName:"Bandung Family Adventure",
+ tripNotes:"Family trip for 2 adults and Melissa (4). Keep the pace balanced, allow downtime, and prioritise family-friendly stops. Already paid: S$985.20 noted in earlier planning; confirm your own booking records for the exact breakdown.",
+ outAirline:"Scoot",outFlight:"22 Nov 2026 · SIN → CGK · 07:55–08:50",outRef:"",
+ returnAirline:"Garuda Indonesia",returnFlight:"27 Nov 2026 · CGK → SIN · 18:45–21:45",returnRef:"",
+ hotel1:"Bobocabin Signature Sukawana",hotel1Notes:"22–24 November 2026 · 2 nights",
+ hotel2:"voco Bandung Setiabudi",hotel2Notes:"24–27 November 2026 · 3 nights",
+ transportPlan:"Day 1 · Grab from Soekarno-Hatta Airport to Halim Station → Whoosh to Padalarang (Business Class intended, buy at station subject to availability) → decide driver vs Grab to Bobocabin.\nDay 2 · Private driver for Lembang sightseeing.\nDay 3 · Transfer from Bobocabin to voco Bandung Setiabudi; consider Cihampelas Walk.\nDay 4 · Optional longer Ciwidey / Kawah Putih day trip; decide based on family comfort.\nDay 5 · City day: Braga and central Bandung; use Grab where practical.\nDay 6 · Checkout, travel to Padalarang → Whoosh to Halim → Grab to CGK for 18:45 flight. Leave a generous buffer.",
+ driverRate:650000,driverDays:5,driverNotes:"Latest quoted rate: Rp650,000/day. Confirm car type, passenger/luggage capacity, fuel, tolls, parking, overtime, waiting time and whether the quote covers all planned days.",
+ transportNotes:"Day 1: compare Grab vs driver for Padalarang–Bobocabin. Whoosh tickets not yet marked confirmed. Check child fare, seat availability and station transfer time.",
+ foodNotes:"Halal-preferred. Verify halal status and ingredients directly. Keep meals flexible for Melissa; have snacks and a backup option.",
+ budgetTotal:1200,cashAllocation:500,youtripAllocation:700,exchangeRate:12900,
+ budgetCategories:[{name:"Food & drinks",amount:250},{name:"Local transport / Grab",amount:150},{name:"Private driver",amount:250},{name:"Activities / entrance fees",amount:150},{name:"Shopping & souvenirs",amount:150},{name:"Snacks / child expenses",amount:100},{name:"Contingency",amount:150}],
+ bookings:[{name:"Flights",done:true},{name:"Bobocabin",done:true},{name:"voco Bandung",done:true},{name:"Travel insurance",done:false},{name:"Whoosh tickets",done:false},{name:"Private driver",done:false},{name:"Airport transfers",done:false}],
+ days:[
+ {date:"22 Nov · Sun",title:"Arrival & settle in",area:"Jakarta → Padalarang → Sukawana",activities:["Land at Soekarno-Hatta Airport","Grab to Halim Station","Whoosh to Padalarang (Business Class intended; purchase at station subject to availability)","Transfer to Bobocabin Sukawana","Check in, settle in and enjoy the cabin"],meals:["Breakfast at airport / en route","Lunch during transfer","Dinner near Bobocabin or takeaway"]},
+ {date:"23 Nov · Mon",title:"Lembang adventure",area:"Lembang / North Bandung",activities:["Explore Lembang","Orchid Forest Cikole","Nature, scenic and photo stops","Return to Bobocabin"],meals:["Breakfast at Bobocabin","Lunch in Lembang","Dinner in Lembang or near accommodation"]},
+ {date:"24 Nov · Tue",title:"Accommodation transfer & shopping",area:"Sukawana → Setiabudi → Cihampelas",activities:["Breakfast and check out Bobocabin","Transfer to voco Bandung Setiabudi","Check in / leave luggage","Cihampelas Walk","Relax at hotel"],meals:["Breakfast at Bobocabin","Lunch around Setiabudi","Dinner at Cihampelas Walk"]},
+ {date:"25 Nov · Wed",title:"South Bandung day trip",area:"Kawah Putih / Ciwidey",activities:["Kawah Putih (OPTIONAL – decide if suitable for family)","Explore Ciwidey scenic surroundings if comfortable","Return to voco"],meals:["Breakfast at voco","Lunch around Ciwidey","Dinner near hotel"]},
+ {date:"26 Nov · Thu",title:"Bandung city & heritage",area:"Braga / Central Bandung",activities:["Explore Braga Street","Photography and heritage buildings","Local shopping","Relaxed city sightseeing"],meals:["Breakfast at voco","Lunch in central Bandung","Dinner around Braga / city centre"]},
+ {date:"27 Nov · Fri",title:"Checkout & return to Singapore",area:"Bandung → Padalarang → Jakarta → Singapore",activities:["Breakfast at voco","Checkout (confirm hotel checkout time)","Last-minute sightseeing / shopping if time permits","Travel to Padalarang Station","Whoosh to Halim","Grab to Soekarno-Hatta Airport","Garuda flight home"],meals:["Breakfast at voco","Lunch in Bandung","Early dinner / meal at airport"]}
+ ],
+ packing:["Passports (all 3)","Flight tickets / booking confirmations","Whoosh tickets / booking details","Hotel confirmations","Travel insurance details","YouTrip card and backup bank card","Indonesian Rupiah cash","Phone chargers and cables","Power bank","Universal travel adapter","Clothes for 6 days","Underwear and socks","Comfortable walking shoes","Jacket / warmer layers for Sukawana","Melissa's spare clothes","Child essentials / favourite comfort item","Toiletries and skincare","Medication and basic first-aid kit","Wet wipes, tissues and hand sanitiser","Small backpack / day bag","Water bottles and snacks for Melissa"],
+ ideas:["Floating Market Lembang","The Great Asia Africa","Farmhouse Lembang","Dusun Bambu","Tangkuban Perahu","Orchid Forest Cikole","Kawah Putih","Ranca Upas","Braga Street","Asia Afrika Street","Gedung Sate","Cihampelas Walk","Paris Van Java Mall","Rumah Mode Factory Outlet","Lembang Park & Zoo","Dago Dreampark","Saung Angklung Udjo","Sudut Pandang Bandung","Teras Cikapundung"],
+ foodIdeas:["Halal Sundanese food","Nasi Padang","Bakso / soto","Local Bandung snacks","Cafe / dessert stop","Hotel or mall dining"],
+ expenses:[],packingDone:[],selectedDay:0
+};
+let state;
+try{state=JSON.parse(localStorage.getItem("bandungTripData"))||structuredClone(defaults)}catch(e){state=structuredClone(defaults)}
+function mergeDefaults(){state={...structuredClone(defaults),...state};}
+mergeDefaults();
+let saveTimer;
+function save(){document.getElementById("saveStatus").textContent="Saving…";clearTimeout(saveTimer);saveTimer=setTimeout(()=>{localStorage.setItem("bandungTripData",JSON.stringify(state));document.getElementById("saveStatus").textContent="Saved on this device · "+new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});renderStats()},180)}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function money(n){return "S$"+(Number(n)||0).toLocaleString("en-SG",{minimumFractionDigits:0,maximumFractionDigits:2})}
+function idr(n){return "Rp"+Math.round(Number(n)||0).toLocaleString("id-ID")}
+function bindInputs(){document.querySelectorAll("[data-bind]").forEach(el=>{let k=el.dataset.bind;el.value=state[k]??"";el.addEventListener("input",()=>{state[k]=el.type==="number"?Number(el.value):el.value;save();if(["budgetTotal","cashAllocation","youtripAllocation","exchangeRate"].includes(k))renderBudget();if(["driverRate","driverDays"].includes(k))renderTransport();if(k==="tripName")document.getElementById("heroTitle").textContent=state.tripName})})}
+function renderStats(){let p=state.packingDone.length;document.getElementById("packedStat").textContent=p+"/"+state.packing.length;let spent=state.expenses.reduce((s,x)=>s+x.sgd,0);document.getElementById("spentStat").textContent=money(spent)}
+function renderBookings(){document.getElementById("bookingList").innerHTML=state.bookings.map((b,i)=>`<label class="listrow ${b.done?'done':''}"><input type="checkbox" ${b.done?'checked':''} data-book="${i}"><span class="txt">${esc(b.name)}</span><span class="tiny">${b.done?'Done':'Pending'}</span></label>`).join("");document.querySelectorAll("[data-book]").forEach(el=>el.onchange=()=>{state.bookings[+el.dataset.book].done=el.checked;save();renderBookings()})}
+function renderItinerary(){let idx=Math.min(state.selectedDay,state.days.length-1);state.selectedDay=idx;document.getElementById("dayTabs").innerHTML=state.days.map((d,i)=>`<button data-day="${i}" class="${i===idx?'active':''}"><b>Day ${i+1}</b>${esc(d.date.split("·")[0])}</button>`).join("");document.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>{state.selectedDay=+b.dataset.day;renderItinerary();save()});let d=state.days[idx];document.getElementById("dayEditor").innerHTML=`<div class="card"><div class="eyebrow">${esc(d.date)}</div><div class="field"><label>Day title</label><input id="dayTitle" value="${esc(d.title)}"></div><div class="field"><label>Area / location</label><input id="dayArea" value="${esc(d.area)}"></div><div class="divider"></div><h3>Activities & places</h3><div id="activities">${d.activities.map((a,i)=>itemRow(a,i,"activity")).join("")}</div><div class="addline"><input id="newActivity" placeholder="Add activity or attraction"><button class="btn teal" id="addActivity">Add</button></div><div class="divider"></div><h3>Food & eating places</h3><div id="meals">${d.meals.map((a,i)=>itemRow(a,i,"meal")).join("")}</div><div class="addline"><input id="newMeal" placeholder="Add restaurant / meal stop"><button class="btn teal" id="addMeal">Add</button></div></div>`;document.getElementById("dayTitle").oninput=e=>{d.title=e.target.value;save()};document.getElementById("dayArea").oninput=e=>{d.area=e.target.value;save()};document.getElementById("addActivity").onclick=()=>addDayItem("activities","newActivity");document.getElementById("addMeal").onclick=()=>addDayItem("meals","newMeal");document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{let [type,i]=b.dataset.remove.split(":");d[type].splice(+i,1);save();renderItinerary()});document.querySelectorAll("[data-edit]").forEach(inp=>inp.onchange=()=>{let [type,i]=inp.dataset.edit.split(":");d[type][+i]=inp.value;save()})}
+function itemRow(v,i,type){return `<div class="item"><div class="content"><input data-edit="${type==='activity'?'activities':'meals'}:${i}" value="${esc(v)}"></div><button class="iconbtn" data-remove="${type==='activity'?'activities':'meals'}:${i}" aria-label="Remove">×</button></div>`}
+function addDayItem(type,id){let el=document.getElementById(id),v=el.value.trim();if(!v)return;state.days[state.selectedDay][type].push(v);save();renderItinerary()}
+function renderFood(){document.getElementById("foodDays").innerHTML=state.days.map((d,i)=>`<div class="card"><div class="row between"><h3>Day ${i+1} · ${esc(d.date)}</h3><span class="pill">${d.meals.length} stops</span></div>${d.meals.map(x=>`<div class="small" style="padding:5px 0">• ${esc(x)}</div>`).join("")}<button class="btn secondary smallbtn" data-foodday="${i}">Edit food stops</button></div>`).join("");document.querySelectorAll("[data-foodday]").forEach(b=>b.onclick=()=>{showPage("itinerary");state.selectedDay=+b.dataset.foodday;renderItinerary()});document.getElementById("foodBank").innerHTML=state.foodIdeas.map((x,i)=>`<div class="item"><div class="content small">${esc(x)}</div><button class="iconbtn" data-foodremove="${i}">×</button></div>`).join("");document.querySelectorAll("[data-foodremove]").forEach(b=>b.onclick=()=>{state.foodIdeas.splice(+b.dataset.foodremove,1);save();renderFood()});document.getElementById("addFoodIdea").onclick=()=>{let el=document.getElementById("foodIdeaInput");if(el.value.trim()){state.foodIdeas.push(el.value.trim());el.value="";save();renderFood()}}}
+function renderTransport(){document.getElementById("driverTotal").textContent=idr(state.driverRate*state.driverDays);let checks=["Day 1: choose Grab or pre-arranged driver from Padalarang to Bobocabin","Whoosh Business Class: check tickets, child fare and availability","Day 2: confirm Lembang driver and pickup time","Day 3: confirm hotel-to-hotel transfer","Day 4: decide whether Ciwidey / Kawah Putih is worth the long drive","Day 6: allow generous time for Padalarang → Halim → CGK"];let box=document.getElementById("transportChecks");box.innerHTML=checks.map((x,i)=>`<label class="listrow"><input type="checkbox" data-tcheck="${i}" ${state.transportChecks?.includes(i)?'checked':''}><span class="txt">${x}</span></label>`).join("");box.querySelectorAll("input").forEach(el=>el.onchange=()=>{state.transportChecks=state.transportChecks||[];let i=+el.dataset.tcheck;state.transportChecks=el.checked?[...state.transportChecks,i]:state.transportChecks.filter(x=>x!==i);save()})}
+function renderBudget(){let total=+state.budgetTotal||0,cash=+state.cashAllocation||0,yt=+state.youtripAllocation||0,spent=state.expenses.reduce((s,x)=>s+x.sgd,0);document.getElementById("budgetTotalDisplay").textContent=money(total);document.getElementById("cashDisplay").textContent=money(cash);document.getElementById("youtripDisplay").textContent=money(yt);let rem=total-cash-yt;document.getElementById("unallocated").textContent=money(rem);document.getElementById("unallocated").style.color=rem<0?"#b84e4e":"#247d70";document.getElementById("allocationMessage").textContent=rem<0?"Your allocation exceeds the budget. Adjust cash or YouTrip.":rem>0?"You still have "+money(rem)+" unallocated.":"Your budget is fully allocated.";document.getElementById("spentTotal").textContent=money(spent);document.getElementById("remaining").textContent=money(total-spent);document.getElementById("expenseCount").textContent=state.expenses.length+" entries";document.getElementById("idrOutput").value=idr((+document.getElementById("sgdInput").value||0)*(+state.exchangeRate||0));document.getElementById("budgetCategories").innerHTML=state.budgetCategories.map((x,i)=>`<div class="budgetrow"><input data-catname="${i}" value="${esc(x.name)}"><input type="number" data-catamount="${i}" value="${x.amount}"><button class="iconbtn" data-catdel="${i}">×</button></div>`).join("");document.querySelectorAll("[data-catname]").forEach(e=>e.onchange=()=>{state.budgetCategories[+e.dataset.catname].name=e.value;save()});document.querySelectorAll("[data-catamount]").forEach(e=>e.onchange=()=>{state.budgetCategories[+e.dataset.catamount].amount=+e.value;save()});document.querySelectorAll("[data-catdel]").forEach(e=>e.onclick=()=>{state.budgetCategories.splice(+e.dataset.catdel,1);save();renderBudget()});document.getElementById("expenseList").innerHTML=state.expenses.map((x,i)=>`<div class="item"><div class="content"><b class="small">${esc(x.name)}</b><small>${esc(x.day)} · ${esc(x.method)} · ${esc(x.currency)}</small></div><div class="small" style="font-weight:800">${money(x.sgd)}</div><button class="iconbtn" data-expdel="${i}">×</button></div>`).join("")||'<div class="tiny">No expenses recorded yet.</div>';document.querySelectorAll("[data-expdel]").forEach(e=>e.onclick=()=>{state.expenses.splice(+e.dataset.expdel,1);save();renderBudget()});renderStats()}
+function renderPacking(){document.getElementById("packingList").innerHTML=state.packing.map((x,i)=>`<label class="listrow ${state.packingDone.includes(i)?'done':''}"><input type="checkbox" data-pack="${i}" ${state.packingDone.includes(i)?'checked':''}><span class="txt">${esc(x)}</span><button type="button" class="iconbtn" data-packdel="${i}">×</button></label>`).join("");document.querySelectorAll("[data-pack]").forEach(e=>e.onchange=()=>{let i=+e.dataset.pack;state.packingDone=e.checked?[...state.packingDone,i]:state.packingDone.filter(x=>x!==i);save();renderPacking()});document.querySelectorAll("[data-packdel]").forEach(e=>e.onclick=ev=>{ev.preventDefault();let i=+e.dataset.packdel;state.packing.splice(i,1);state.packingDone=state.packingDone.filter(x=>x!==i).map(x=>x>i?x-1:x);save();renderPacking()});let n=state.packingDone.length,pct=state.packing.length?Math.round(n/state.packing.length*100):0;document.getElementById("packingCount").textContent=n+" of "+state.packing.length+" packed";document.getElementById("packingPercent").textContent=pct+"%";document.getElementById("packingProgress").style.width=pct+"%";renderStats()}
+function renderIdeas(){document.getElementById("ideaCount").textContent=state.ideas.length+" ideas";document.getElementById("ideaDay").innerHTML=state.days.map((d,i)=>`<option value="${i}">Day ${i+1} · ${esc(d.date)}</option>`).join("");document.getElementById("ideaList").innerHTML=state.ideas.map((x,i)=>`<div class="item"><div class="content small">${esc(x)}</div><button class="btn secondary smallbtn" data-ideaadd="${i}">Add to day</button><button class="iconbtn" data-ideadel="${i}">×</button></div>`).join("");document.querySelectorAll("[data-ideaadd]").forEach(e=>e.onclick=()=>{let idea=state.ideas[+e.dataset.ideaadd],day=+document.getElementById("ideaDay").value;state.days[day].activities.push(idea);save();alert("Added to Day "+(day+1));});document.querySelectorAll("[data-ideadel]").forEach(e=>e.onclick=()=>{state.ideas.splice(+e.dataset.ideadel,1);save();renderIdeas()})}
+function renderAll(){renderBookings();renderItinerary();renderFood();renderTransport();renderBudget();renderPacking();renderIdeas();renderStats();document.getElementById("heroTitle").textContent=state.tripName}
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));window.scrollTo({top:0,behavior:"smooth"})}
+document.getElementById("nav").addEventListener("click",e=>{let b=e.target.closest("button[data-page]");if(b)showPage(b.dataset.page)});
+document.getElementById("addExpense").onclick=()=>{let name=document.getElementById("expenseName").value.trim(),amount=+document.getElementById("expenseAmount").value;if(!name||!amount||amount<0)return alert("Enter an expense description and a valid amount.");let currency=document.getElementById("expenseCurrency").value,sgd=currency==="SGD"?amount:amount/(+state.exchangeRate||12900);state.expenses.push({name,amount,currency,sgd,day:document.getElementById("expenseDay").value,method:document.getElementById("expenseMethod").value});document.getElementById("expenseName").value="";document.getElementById("expenseAmount").value="";save();renderBudget()};
+document.getElementById("sgdInput").oninput=()=>{document.getElementById("idrOutput").value=idr((+document.getElementById("sgdInput").value||0)*(+state.exchangeRate||0))};
+document.getElementById("refreshRate").onclick=async()=>{let b=document.getElementById("refreshRate");b.textContent="Checking…";try{let r=await fetch("https://open.er-api.com/v6/latest/SGD");let j=await r.json();if(!j.rates||!j.rates.IDR)throw Error("Rate unavailable");state.exchangeRate=Math.round(j.rates.IDR*100)/100;document.querySelector('[data-bind="exchangeRate"]').value=state.exchangeRate;document.getElementById("rateStatus").textContent="Online rate refreshed · "+new Date().toLocaleString()+" · indicative mid-market rate";save();renderBudget()}catch(e){document.getElementById("rateStatus").textContent="Could not refresh. Check connection; your saved rate is still available."}b.textContent="Refresh live rate"};
+document.getElementById("addCategory").onclick=()=>{let n=document.getElementById("categoryName").value.trim(),a=+document.getElementById("categoryAmount").value;if(!n)return;state.budgetCategories.push({name:n,amount:a});document.getElementById("categoryName").value="";document.getElementById("categoryAmount").value="";save();renderBudget()};
+document.getElementById("addPacking").onclick=()=>{let el=document.getElementById("packingInput");if(el.value.trim()){state.packing.push(el.value.trim());el.value="";save();renderPacking()}};
+document.getElementById("resetPacking").onclick=()=>{if(confirm("Reset all packing checkboxes?")){state.packingDone=[];save();renderPacking()}};
+document.getElementById("addIdea").onclick=()=>{let el=document.getElementById("ideaInput");if(el.value.trim()){state.ideas.push(el.value.trim());el.value="";save();renderIdeas()}};
+document.getElementById("exportBtn").onclick=()=>{let blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="bandung-trip-backup.json";a.click();URL.revokeObjectURL(url)};
+document.getElementById("importBtn").onclick=()=>document.getElementById("importFile").click();
+document.getElementById("importFile").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let imported=JSON.parse(await f.text());if(!imported.days||!imported.packing)throw Error("This doesn't look like a Bandung trip backup.");state={...structuredClone(defaults),...imported};save();bindInputs();renderAll();alert("Backup restored successfully.")}catch(err){alert("Could not import: "+err.message)}e.target.value=""};
+document.getElementById("shareBtn").onclick=async()=>{let data={title:"Bandung Family Trip",text:"Our Bandung family trip planner",url:location.href};if(navigator.share){try{await navigator.share(data)}catch(e){}}else{try{await navigator.clipboard.writeText(location.href);alert("Website link copied.")}catch(e){alert("Copy this page URL from your browser address bar.")}}};
+bindInputs();renderAll();
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+</script>
+</body>
+</html>
